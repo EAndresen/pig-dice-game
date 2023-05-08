@@ -17,13 +17,13 @@ function addPlayerScore(score) {
   if (currentPlayer === 0) {
     player0Score = player0Score + score
     setPlayerScore(player0Score)
-    if (player0Score > 9) {
+    if (player0Score > 19) {
       winner()
     }
   } else {
     player1Score = player1Score + score
     setPlayerScore(player1Score)
-    if (player1Score > 9) {
+    if (player1Score > 19) {
       winner()
     }
   }
