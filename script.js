@@ -10,6 +10,7 @@ const player1El = document.querySelector(`.player--1`);
 btnRollEl.addEventListener(`click`, rollDice);
 btnHoldEl.addEventListener(`click`, holdScore);
 btnNewEl.addEventListener(`click`, init);
+document.addEventListener(`keydown`, keyPressed);
 
 let currentPlayer, scores, currentScore;
 
@@ -98,4 +99,14 @@ function setPlayerScore(score) {
 
 function randomIntFromInterval(min, max) { // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function keyPressed(event) {
+  if (event.code === `Space`) {
+    rollDice();
+  } else if (event.key === `Enter`) {
+    holdScore();
+  } else if (event.key === `Escape`) {
+    init();
+  }
 }
