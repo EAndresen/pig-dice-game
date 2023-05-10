@@ -1,126 +1,101 @@
 'use strict';
 
-let currentPlayer = 0
-let player0Score = 0
-let player1Score = 0
-let currentScore = 0
+const diceEl = document.querySelector(`.dice`);
+const btnRollEl = document.querySelector(`.btn--roll`);
+const btnHoldEl = document.querySelector(`.btn--hold`);
+const btnNewEl = document.querySelector(`.btn--new`);
+const player0El = document.querySelector(`.player--0`);
+const player1El = document.querySelector(`.player--1`);
 
-const btnRollDice = document.querySelector(`.btn--roll`)
-btnRollDice.addEventListener(`click`, rollDice)
+btnRollEl.addEventListener(`click`, rollDice);
+btnHoldEl.addEventListener(`click`, holdScore);
+btnNewEl.addEventListener(`click`, init);
 
-const btnHold = document.querySelector(`.btn--hold`)
-btnHold.addEventListener(`click`, holdScore)
+let currentPlayer, scores, currentScore;
 
-const btnNewGame = document.querySelector(`.btn--new`)
-btnNewGame.addEventListener(`click`, newGame)
+init();
+
+function init() {
+  player0El.classList.add(`player--active`);
+  player1El.classList.remove(`player--active`);
+
+  let players = document.querySelectorAll(`.player`);
+  players.forEach(player => {
+    if (player.classList.contains(`player--winner`)) {
+      player.classList.remove(`player--winner`);
+    }
+  });
+
+  for (let i = 0; i < 2; i++) {
+    currentPlayer = i;
+    setPlayerScore(0);
+  }
+
+  currentPlayer = 0;
+  currentScore = 0;
+  scores = [0, 0];
+  btnHoldEl.disabled = false;
+  btnRollEl.disabled = false;
+}
+
 function addPlayerScore(score) {
-  if (currentPlayer === 0) {
-    player0Score = player0Score + score
-    setPlayerScore(player0Score)
-    if (player0Score > 19) {
-      winner()
-    }
-  } else {
-    player1Score = player1Score + score
-    setPlayerScore(player1Score)
-    if (player1Score > 19) {
-      winner()
-    }
+  scores[currentPlayer] += score;
+  setPlayerScore(scores[currentPlayer]);
+  if (scores[currentPlayer] > 19) {
+    winner();
   }
 }
 
+
 function winner() {
-  let players = document.querySelectorAll(`.player`)
-  players.forEach(player => {
-    if (player.classList.contains(`player--` + currentPlayer)) {
-      player.classList.add(`player--winner`)
-    }
-  })
-  btnHold.disabled = true
-  btnRollDice.disabled = true
+  diceEl.classList.add(`hidden`);
+  document.querySelector(`.player--${currentPlayer}`).classList.add(`player--winner`);
+  btnHoldEl.disabled = true;
+  btnRollEl.disabled = true;
 }
 
 function rollDice() {
-  const diceRoll = randomIntFromInterval(1, 6)
-  if (diceRoll === 1) {
-    document.querySelector(`.dice`).src = `dice-` + diceRoll + `.png`
-    endTurn(0)
+  const dice = randomIntFromInterval(1, 6);
+  diceEl.classList.remove(`hidden`);
+  diceEl.src = `dice-${dice}.png`;
+  if (dice === 1) {
+    endTurn(0);
   } else {
-    document.querySelector(`.dice`).src = `dice-` + diceRoll + `.png`
-    currentScore = Number(document.getElementById(`current--` + String(currentPlayer)).textContent)
-    currentScore = currentScore + diceRoll
-    document.getElementById(`current--` + String(currentPlayer)).textContent = String(currentScore)
+    currentScore = currentScore + dice;
+    document.getElementById(`current--${String(currentPlayer)}`).textContent = String(currentScore);
   }
 }
 
 function holdScore() {
-  endTurn(currentScore)
-
+  endTurn(currentScore);
 }
 
 function endTurn(score) {
   if (score === 0) {
-    resetCurrentPlayerScore()
-    switchPlayer()
+    resetCurrentPlayerScore();
+    switchPlayer();
   } else {
-    resetCurrentPlayerScore()
-    addPlayerScore(score)
-    switchPlayer()
+    resetCurrentPlayerScore();
+    addPlayerScore(score);
+    switchPlayer();
   }
 }
 
 function switchPlayer() {
-  currentPlayer === 0 ? currentPlayer = 1 : currentPlayer = 0
-  currentScore = 0
-  let players = document.querySelectorAll(`.player`)
-  players.forEach(player => {
-    if (player.classList.contains(`player--active`)) {
-      player.classList.remove(`player--active`)
-    } else {
-      player.classList.add(`player--active`)
-    }
-  })
-}
-
-function newGame() {
-  let players = document.querySelectorAll(`.player`)
-  players.forEach(player => {
-    if (player.classList.contains(`player--0`) && !player.classList.contains(`player--active`)) {
-      player.classList.add(`player--active`)
-    } else if (player.classList.contains(`player--1`) && player.classList.contains(`player--active`)) {
-      player.classList.remove(`player--active`)
-    }
-
-    if (player.classList.contains(`player--winner`)) {
-      player.classList.remove(`player--winner`)
-    }
-  })
-
-  for (let i = 0; i < 2; i++) {
-    currentPlayer = i
-    setPlayerScore(0)
-  }
-  player0Score = 0
-  player1Score = 0
-  currentScore = 0
-  currentPlayer = 0
-
-  if (btnHold.disabled) {
-    btnHold.disabled = false
-  }
-  if (btnRollDice.disabled) {
-    btnRollDice.disabled = false
-  }
+  currentPlayer = currentPlayer === 0 ? 1 : 0;
+  currentScore = 0;
+  player0El.classList.toggle(`player--active`);
+  player1El.classList.toggle(`player--active`);
 }
 
 function resetCurrentPlayerScore() {
-  document.getElementById(`current--` + String(currentPlayer)).textContent = `0`
+  document.getElementById(`current--${String(currentPlayer)}`).textContent = `0`;
 }
 
-function setPlayerScore(score){
-  document.getElementById(`score--` + currentPlayer).textContent = score
+function setPlayerScore(score) {
+  document.getElementById(`score--${String(currentPlayer)}`).textContent = score;
 }
 
 function randomIntFromInterval(min, max) { // min and max included
-  return Math.floor(Math.random() * (max - min + 1) + min)
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }

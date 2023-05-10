@@ -166,3 +166,11 @@ main {
   font-weight: 700;
   color: #f15302;
 }
+
+.hidden {
+  display: none;
+}
+
+.btn:disabled {
+  background-color: rgba(131, 131, 131, 0.6);
+}
