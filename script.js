@@ -19,6 +19,9 @@ init();
 function init() {
   player0El.classList.add(`player--active`);
   player1El.classList.remove(`player--active`);
+  diceEl.classList.add(`hidden`);
+  document.getElementById(`current--0`).textContent = `0`;
+  document.getElementById(`current--1`).textContent = `0`;
 
   let players = document.querySelectorAll(`.player`);
   players.forEach(player => {
