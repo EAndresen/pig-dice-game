@@ -9,7 +9,6 @@
 </head>
 <body>
 <header>
-  <a class='button-pop hidden' href='#popup1'>Rules</a>
 </header>
 <main>
   <div class='container'>
@@ -33,14 +32,15 @@
     <img src='dice-6.png' alt='Playing dice' class='dice hidden' />
     <button class='btn btn--roll'>🎲 Roll dice</button>
     <button class='btn btn--hold'>📥 Hold</button>
+    <button class='btn btn--rules button-pop'>📜 Rules</button>
     <button class='btn btn--new'>🔄 New game</button>
   </div>
 </main>
 
-<div id='popup1' class='overlay'>
+<div id='popup' class='overlay hidden'>
   <div class='popup'>
     <h2>Rules</h2>
-    <a class='close' href='#'>&times;</a>
+    <button id='close'>&times;</button>
     <div class='content'>
       <p>
         On a turn, a player rolls the die repeatedly. The goal is to accumulate as many points as

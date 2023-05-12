@@ -4,6 +4,8 @@ const diceEl = document.querySelector(`.dice`);
 const btnRollEl = document.querySelector(`.btn--roll`);
 const btnHoldEl = document.querySelector(`.btn--hold`);
 const btnNewEl = document.querySelector(`.btn--new`);
+const btnRulesEl = document.querySelector(`.btn--rules`);
+const btnCloseEl = document.querySelector(`#close`);
 const player0El = document.querySelector(`.player--0`);
 const player1El = document.querySelector(`.player--1`);
 
@@ -11,6 +13,8 @@ btnRollEl.addEventListener(`click`, rollDice);
 btnHoldEl.addEventListener(`click`, holdScore);
 btnNewEl.addEventListener(`click`, init);
 document.addEventListener(`keydown`, keyPressed);
+btnRulesEl.addEventListener(`click`, toggleRules);
+btnCloseEl.addEventListener(`click`, toggleRules);
 
 let currentPlayer, scores, currentScore;
 
@@ -90,6 +94,10 @@ function switchPlayer() {
   currentScore = 0;
   player0El.classList.toggle(`player--active`);
   player1El.classList.toggle(`player--active`);
+}
+
+function toggleRules() {
+  document.getElementById(`popup`).classList.toggle(`hidden`);
 }
 
 function resetCurrentPlayerScore() {
