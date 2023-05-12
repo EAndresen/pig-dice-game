@@ -1,0 +1,238 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    height: 100vh;
+    color: #333;
+    background-image: linear-gradient(to top left, #f15302 0%, #2ea4bf 100%);
+}
+
+.container {
+    backdrop-filter: blur(200px);
+    filter: blur();
+    border-radius: 5px;
+    width: 95vw;
+    height: 97vh;
+    margin: 15px auto auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto 1fr auto auto;
+    gap: 10px;
+
+}
+
+.score {
+    font-size: 5rem;
+    font-weight: 300;
+    color: #f15302;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+}
+
+.current {
+    margin: auto;
+    background-color: #f15302;
+    opacity: 0.8;
+    border-radius: 9px;
+    color: #fff;
+    width: 92%;
+    padding: 1rem 0.5rem;
+    text-align: center;
+}
+
+.current p {
+    display: inline;
+}
+
+.player--winner {
+    background-color: #2f2f2f;
+}
+
+.player--winner .name {
+    font-weight: 700;
+    color: #f15302;
+}
+
+.player--active {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.player {
+    border-radius: 10px;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.name {
+    text-align: center;
+}
+
+.player--0 {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+}
+
+.player--1 {
+    grid-column: 3 /span 2;
+    grid-row: 1 / span 2;
+}
+
+.btn--new {
+    grid-column: 2 / span 2;
+    grid-row: 5;
+    align-self: end;
+}
+
+.btn--roll {
+    grid-column: 1 / span 2;
+    grid-row: 4;
+    height: 300px;
+}
+
+.btn--hold {
+    grid-column: 3 / span 2;
+    grid-row: 4;
+}
+
+.btn {
+    color: #444;
+    background: none;
+    font-family: inherit;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 400;
+    border-radius: 5px;
+    height: 80px;
+    transition: all 0.2s;
+
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+}
+
+.hidden {
+    display: none;
+}
+
+.dice {
+    position: absolute;
+    left: 50%;
+    top: 16.5rem;
+    transform: translateX(-50%);
+    height: 15rem;
+    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+/* PopUp */
+.box {
+    width: 40%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 35px;
+    border: 2px solid #fff;
+    border-radius: 20px/50px;
+    background-clip: padding-box;
+    text-align: center;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 50%;
+    position: relative;
+}
+
+.popup h2 {
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 1em;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+.popup h3 {
+    font-size: 25px;
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+.popup p {
+    font-size: 20px;
+    padding: 10px;
+
+}
+
+.popup ul {
+    font-size: 20px;
+    margin-left: 10px;
+    list-style: none;
+}
+
+.popup .close {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.popup .close:hover {
+    color: #424242;
+}
+
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+}
+
+@media screen and (max-width: 700px) {
+    .box {
+        width: 70%;
+    }
+
+    .popup {
+        width: 70%;
+    }
+}
+
+.button-pop {
+    position: absolute;
+    color: #424242;
+    font-size: 3em;
+    padding: 10px;
+    border-radius: 20px/50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
