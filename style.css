@@ -16,7 +16,7 @@ body {
     font-weight: 400;
     height: 100vh;
     color: #333;
-    background-image: linear-gradient(to top left, #f15302 0%, #2ea4bf 100%);
+    background-image: linear-gradient(to top left, #753682 0%, #bf2e34 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,17 +32,23 @@ main {
     filter: blur();
     box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
     border-radius: 9px;
-    overflow: hidden;
     display: flex;
 }
 
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+}
+
 .player {
-    flex: 50%;
-    padding: 9rem;
+    width: 100%;
+    padding: 8rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: all 0.75s;
+    grid-column: span 2;
 }
 
 /* ELEMENTS */
@@ -59,18 +65,16 @@ main {
 .score {
     font-size: 8rem;
     font-weight: 300;
-    color: #f15302;
+    color: #c7365f;
     margin-bottom: auto;
 }
 
 .player--active {
     background-color: rgba(255, 255, 255, 0.4);
 }
-
 .player--active .name {
     font-weight: 700;
 }
-
 .player--active .score {
     font-weight: 400;
 }
@@ -80,7 +84,7 @@ main {
 }
 
 .current {
-    background-color: #f15302;
+    background-color: #c7365f;
     opacity: 0.8;
     border-radius: 9px;
     color: #fff;
@@ -103,9 +107,6 @@ main {
 
 /* ABSOLUTE POSITIONED ELEMENTS */
 .btn {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     color: #444;
     background: none;
     border: none;
@@ -115,6 +116,7 @@ main {
     cursor: pointer;
     font-weight: 400;
     transition: all 0.2s;
+    margin: 1rem 2rem 2rem;
 
     background-color: white;
     background-color: rgba(255, 255, 255, 0.6);
@@ -132,19 +134,23 @@ main {
 }
 
 .btn--new {
-    top: 4rem;
+    grid-column: 2;
+    grid-row: 3;
 }
-
 .btn--roll {
-    top: 39.3rem;
+    grid-column: 2;
+    grid-row: 2;
 }
-
 .btn--hold {
-    top: 46.1rem;
+    grid-column: 3;
+    grid-row: 2;
+}
+.btn--rules {
+    grid-column: 3;
+    grid-row: 3;
 }
 
 .btn:active {
-    transform: translate(-50%, 3px);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 }
 
@@ -157,9 +163,8 @@ main {
     left: 50%;
     top: 16.5rem;
     transform: translateX(-50%);
-    height: 10rem;
+    height: 14rem;
     box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
 }
 
 .player--winner {
@@ -168,17 +173,14 @@ main {
 
 .player--winner .name {
     font-weight: 700;
-    color: #f15302;
+    color: #c7365f;
 }
 
 .hidden {
     display: none;
 }
 
-.btn:disabled {
-    background-color: rgba(131, 131, 131, 0.6);
-}
-
+/* PopUp */
 .box {
     width: 40%;
     margin: 0 auto;
@@ -187,7 +189,6 @@ main {
     border: 2px solid #fff;
     border-radius: 20px/50px;
     background-clip: padding-box;
-    text-align: center;
     text-align: center;
 }
 
@@ -199,8 +200,7 @@ main {
     right: 0;
     background: rgba(0, 0, 0, 0.7);
     transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
+    visibility: visible;
 }
 
 .overlay:target {
@@ -209,11 +209,11 @@ main {
 }
 
 .popup {
-    margin: 70px auto;
-    padding: 20px;
+    margin: 20px auto;
+    padding: 10px;
     background: #fff;
     border-radius: 5px;
-    width: 50%;
+    width: 80%;
     position: relative;
 }
 
@@ -227,7 +227,8 @@ main {
 
 .popup h3 {
     font-size: 25px;
-    margin-top: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     color: #333;
     font-family: Tahoma, Arial, sans-serif;
 }
@@ -244,43 +245,25 @@ main {
     list-style: none;
 }
 
-.popup .close {
+#close {
     position: absolute;
     top: 10px;
     right: 30px;
     transition: all 200ms;
-    font-size: 30px;
+    font-size: 50px;
     font-weight: bold;
     text-decoration: none;
     color: #333;
+    border: 0;
+    background: none;
+    cursor: pointer;
 }
 
-.popup .close:hover {
+#close:hover {
     color: #424242;
 }
 
 .popup .content {
     max-height: 30%;
     overflow: auto;
-}
-
-@media screen and (max-width: 700px) {
-    .box {
-        width: 70%;
-    }
-
-    .popup {
-        width: 70%;
-    }
-}
-
-.button-pop {
-    position: absolute;
-    color: #424242;
-    font-size: 3em;
-    padding: 10px;
-    border-radius: 20px/50px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease-out;
 }

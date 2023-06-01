@@ -17,6 +17,7 @@ btnRulesEl.addEventListener(`click`, toggleRules);
 btnCloseEl.addEventListener(`click`, toggleRules);
 
 let currentPlayer, scores, currentScore;
+const targetScore = 100
 
 init();
 
@@ -49,7 +50,7 @@ function init() {
 function addPlayerScore(score) {
   scores[currentPlayer] += score;
   setPlayerScore(scores[currentPlayer]);
-  if (scores[currentPlayer] > 19) {
+  if (scores[currentPlayer] >= targetScore) {
     winner();
   }
 }
