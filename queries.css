@@ -1,0 +1,31 @@
+/* 944px */
+@media (max-width: 59em) {
+    .player {
+        padding: 3rem;
+    }
+
+    .btn {
+        padding: 0;
+    }
+
+    .dice {
+        height: 10rem;
+    }
+}
+
+/* 752px */
+@media (max-width: 47em) {
+    main {
+            height: 100vh;
+    }
+
+    .btn {
+        height: 11rem;
+        width: 24rem;
+    }
+
+    .container {
+        grid-template-rows: 6fr 1fr 1fr;
+        height: 100vh;
+    }
+}
